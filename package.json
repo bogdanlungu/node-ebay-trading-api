@@ -1,0 +1,30 @@
+{
+  "name": "node-ebay-trading-api",
+  "version": "1.0.0",
+  "description": "npm module for eBay Trading API",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/demchig/node-ebay-trading-api"
+  },
+  "keywords": [
+    "api",
+    "ebay",
+    "trading"
+  ],
+  "author": "Demchig Batchuluun <demchigb@gmail.com> (http://www.tumnii.net/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/demchig/node-ebay-trading-api/issues"
+  },
+  "homepage": "https://github.com/demchig/node-ebay-trading-api",
+  "devDependencies": {
+  },
+  "dependencies" : {
+    "node-rest-client" : "~1.4.1",
+    "xml2js" : "~0.4.4"
+  }
+}

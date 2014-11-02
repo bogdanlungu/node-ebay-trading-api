@@ -71,6 +71,9 @@
         var builder = new xml2js.Builder({ headless : true });
         var xmlStr = builder.buildObject(jsonObj);
 
+        xmlStr = xmlStr.replace('<root>', '');
+        xmlStr = xmlStr.replace('</root>', '');
+
         var xmlData = '<?xml version="1.0" encoding="utf-8"?>'
         + '<' + callName + 'Request xmlns="urn:ebay:apis:eBLBaseComponents">'
         + '<RequesterCredentials> <eBayAuthToken>'

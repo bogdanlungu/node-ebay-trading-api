@@ -43,6 +43,11 @@
 
     exports.call = function(callName, jsonObj, callback){
 
+        if( ! userToken ){
+            console.error("Set user token first!");
+            return;
+        }
+
         args.headers["X-EBAY-API-CALL-NAME"] = callName;
         args.data = buildXmlData(callName, jsonObj);
 

@@ -15,7 +15,7 @@
     client = new Client();
 
     // registering remote methods
-    client.registerMethod("xmlMethod", "https://api.ebay.com/ws/api.dll", "POST");
+    client.registerMethod("xmlMethod", "https://api.sandbox.ebay.com/ws/api.dll", "POST");
 
     var args = {
         headers : {

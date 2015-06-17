@@ -45,7 +45,9 @@
 
         if( ! userToken ){
         
-        args.headers["X-EBAY-API-APP-NAME"] = 'Xliberator';
+        args.headers["X-EBAY-API-APP-NAME"] = 'ELTSyste-e778-4948-b2a0-7e2ba87d42e2';
+        args.headers["X-EBAY-API-DEV-NAME"] = '6aa7ea99-c860-4a0f-bf19-2d32fe828c70';
+        args.headers["X-EBAY-API-CERT-NAME"] = 'e5a47f74-48e8-4b59-b286-080aebe38556';
         args.headers["X-EBAY-API-CALL-NAME"] = callName;
         args.data = buildXmlNoAuth(callName, jsonObj);
 

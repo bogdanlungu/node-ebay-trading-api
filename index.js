@@ -44,9 +44,20 @@
     exports.call = function(callName, jsonObj, callback){
 
         if( ! userToken ){
-            console.error("Set user token first!");
-            return;
-        }
+        
+        args.headers["X-EBAY-API-CALL-NAME"] = callName;
+        args.data = buildXmlNoAuth(callName, jsonObj);
+
+        client.methods.xmlMethod(args, function(data,response){
+
+            xml2js.parseString(data, function(err, result){
+                callback(result);
+            });
+            
+        });    
+            
+
+        }else{
 
         args.headers["X-EBAY-API-CALL-NAME"] = callName;
         args.data = buildXmlData(callName, jsonObj);
@@ -63,6 +74,8 @@
             });
             
         });
+
+        }
 
 
     };
@@ -83,6 +96,23 @@
         + '<' + callName + 'Request xmlns="urn:ebay:apis:eBLBaseComponents">'
         + '<RequesterCredentials> <eBayAuthToken>'
         + userToken + '</eBayAuthToken> </RequesterCredentials>'
+        + xmlStr
+        + ' </' + callName + 'Request>';
+
+        return xmlData;
+    }
+
+
+    function buildXmlNoAuth(callName, jsonObj)
+     {
+        var builder = new xml2js.Builder({ headless : true });
+        var xmlStr = builder.buildObject(jsonObj);
+
+        xmlStr = xmlStr.replace('<root>', '');
+        xmlStr = xmlStr.replace('</root>', '');
+
+        var xmlData = '<?xml version="1.0" encoding="utf-8"?>'
+        + '<' + callName + 'Request xmlns="urn:ebay:apis:eBLBaseComponents">'
         + xmlStr
         + ' </' + callName + 'Request>';
 

@@ -118,7 +118,8 @@
         + '<' + callName + 'Request xmlns="urn:ebay:apis:eBLBaseComponents">'
         + xmlStr
         + ' </' + callName + 'Request>';
-
+        
+        console.log(xmlData);  
         return xmlData;
     }
 

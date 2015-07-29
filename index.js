@@ -21,7 +21,7 @@
         headers : {
             "X-EBAY-API-CALL-NAME" : "GetItem",
             "X-EBAY-API-SITEID" : 0,
-            "X-E BAY-API-COMPATIBILITY-LEVEL" : 870,
+            "X-EBAY-API-COMPATIBILITY-LEVEL" : 870,
             "Content-Type" : "text/xml"
         },
         data : ''
@@ -117,7 +117,7 @@
         /* Reset the variable xmlStringAlreadyDefined in the scope after the call was done 
          * Otherwise all the other calls will crash. 
          */
-        //xmlStringAlreadyDefined = '';
+        xmlStringAlreadyDefined = '';
       }  
 
 

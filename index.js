@@ -31,6 +31,7 @@
     var xEbayApiAppName = '';
     var xEbayApiDevName = '';
     var xEbayApiCertName = '';
+    var xmlStringAlreadyDefined = '';
 
 
     exports.setUserToken = function(token){
@@ -44,6 +45,12 @@
     };
 
 
+    // the xml string is already received, it needs only to be appended to the credentials nodes
+    exports.setXmlStringAlreadyDefined = function(xmlStringAlreadyDefined){
+        userXmlStringAlreadyDefined = xmlStringAlreadyDefined;
+    };
+
+
     exports.getUserToken = function(){
         return userToken;
     };
@@ -51,6 +58,8 @@
 
 
     exports.call = function(callName, jsonObj, callback){
+
+      if(! userXmlStringAlreadyDefined){
 
         if( ! userToken ){
         
@@ -89,6 +98,24 @@
 
         }
 
+      }else{
+       
+        // here receive the xml string directly and append it to the credentials nodes
+         
+        var xmlStringSent = userXmlStringAlreadyDefined;  
+        args.headers["X-EBAY-API-CALL-NAME"] = callName;
+        args.data = buildXmlWithStringAlreadyReceived(callName, xmlStringSent);
+
+        client.methods.xmlMethod(args, function(data,response){
+
+            xml2js.parseString(data, function(err, result){
+                //inspect(result);
+                callback(result);
+            });
+            
+        });
+      }  
+
 
     };
 
@@ -110,7 +137,7 @@
         + userToken + '</eBayAuthToken> </RequesterCredentials>'
         + xmlStr
         + ' </' + callName + 'Request>';
-
+        console.log(xmlData);
         return xmlData;
     }
 
@@ -129,6 +156,20 @@
         + ' </' + callName + 'Request>';
         
         //console.log(xmlData);  
+        return xmlData;
+    }
+
+    function buildXmlWithStringAlreadyReceived(callName, userXmlStringAlreadyDefined)
+     {
+        var builder = new xml2js.Builder({ headless : true });
+        var xmlStr = userXmlStringAlreadyDefined;
+
+        var xmlData = '<?xml version="1.0" encoding="utf-8"?>'
+        + '<' + callName + 'Request xmlns="urn:ebay:apis:eBLBaseComponents">'
+        + xmlStr
+        + ' </' + callName + 'Request>';
+        
+        console.log(xmlData);  
         return xmlData;
     }
 

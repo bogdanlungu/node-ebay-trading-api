@@ -21,7 +21,7 @@
         headers : {
             "X-EBAY-API-CALL-NAME" : "GetItem",
             "X-EBAY-API-SITEID" : 0,
-            "X-EBAY-API-COMPATIBILITY-LEVEL" : 870,
+            "X-E BAY-API-COMPATIBILITY-LEVEL" : 870,
             "Content-Type" : "text/xml"
         },
         data : ''
@@ -63,7 +63,6 @@
 
         if( ! userToken ){
 
-        console.log('Hello World!');
         args.headers["X-EBAY-API-APP-NAME"] = userXEbayApiAppName;
         args.headers["X-EBAY-API-DEV-NAME"] = userXEbayApiDevName;
         args.headers["X-EBAY-API-CERT-NAME"] = userXEbayApiCertName;
@@ -101,8 +100,7 @@
 
       }else{
        
-        // here receive the xml string directly and append it to the credentials nodes
-         
+        /* Here receive the xml string directly and append it to the credentials nodes */
         var xmlStringSent = userXmlStringAlreadyDefined;  
         args.headers["X-EBAY-API-CALL-NAME"] = callName;
         args.data = buildXmlWithStringAlreadyReceived(callName, xmlStringSent);
@@ -115,6 +113,11 @@
             });
             
         });
+
+        /* Reset the variable xmlStringAlreadyDefined in the scope after the call was done 
+         * Otherwise all the other calls will crash. 
+         */
+        xmlStringAlreadyDefined = '';
       }  
 
 
@@ -172,7 +175,7 @@
         + xmlStr
         + ' </' + callName + 'Request>';
         
-        console.log(xmlData);  
+        // console.log(xmlData);  
         return xmlData;
     }
 

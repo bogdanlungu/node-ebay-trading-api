@@ -117,7 +117,7 @@
         /* Reset the variable xmlStringAlreadyDefined in the scope after the call was done 
          * Otherwise all the other calls will crash. 
          */
-        xmlStringAlreadyDefined = '';
+        //xmlStringAlreadyDefined = '';
       }  
 
 

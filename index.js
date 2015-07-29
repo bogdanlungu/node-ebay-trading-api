@@ -31,7 +31,7 @@
     var xEbayApiAppName = '';
     var xEbayApiDevName = '';
     var xEbayApiCertName = '';
-    var xmlStringAlreadyDefined = '';
+    var xmlStringAlreadyDefined = 0;
 
 
     exports.setUserToken = function(token){

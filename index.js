@@ -62,7 +62,8 @@
       if(! userXmlStringAlreadyDefined){
 
         if( ! userToken ){
-        
+
+        console.log('Hello World!');
         args.headers["X-EBAY-API-APP-NAME"] = userXEbayApiAppName;
         args.headers["X-EBAY-API-DEV-NAME"] = userXEbayApiDevName;
         args.headers["X-EBAY-API-CERT-NAME"] = userXEbayApiCertName;
@@ -137,7 +138,7 @@
         + userToken + '</eBayAuthToken> </RequesterCredentials>'
         + xmlStr
         + ' </' + callName + 'Request>';
-        console.log(xmlData);
+        //console.log(xmlData);
         return xmlData;
     }
 
@@ -166,6 +167,8 @@
 
         var xmlData = '<?xml version="1.0" encoding="utf-8"?>'
         + '<' + callName + 'Request xmlns="urn:ebay:apis:eBLBaseComponents">'
+        + '<RequesterCredentials> <eBayAuthToken>'
+        + userToken + '</eBayAuthToken> </RequesterCredentials>'
         + xmlStr
         + ' </' + callName + 'Request>';
         

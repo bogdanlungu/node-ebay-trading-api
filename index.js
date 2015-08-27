@@ -15,7 +15,7 @@
     client = new Client();
 
     // registering remote methods
-    client.registerMethod("xmlMethod", "https://api.sandbox.ebay.com/ws/api.dll", "POST");
+    client.registerMethod("xmlMethod", "https://api.ebay.com/ws/api.dll", "POST");
 
     var args = {
         headers : {
@@ -74,9 +74,9 @@
             xml2js.parseString(data, function(err, result){
                 callback(result);
             });
-            
-        });    
-            
+
+        });
+
 
         }else{
 
@@ -93,15 +93,15 @@
                 //inspect(result);
                 callback(result);
             });
-            
+
         });
 
         }
 
       }else{
-       
+
         /* Here receive the xml string directly and append it to the credentials nodes */
-        var xmlStringSent = userXmlStringAlreadyDefined;  
+        var xmlStringSent = userXmlStringAlreadyDefined;
         args.headers["X-EBAY-API-CALL-NAME"] = callName;
         args.data = buildXmlWithStringAlreadyReceived(callName, xmlStringSent);
 
@@ -111,14 +111,14 @@
                 //inspect(result);
                 callback(result);
             });
-            
+
         });
 
-        /* Reset the variable xmlStringAlreadyDefined in the scope after the call was done 
-         * Otherwise all the other calls will crash. 
+        /* Reset the variable xmlStringAlreadyDefined in the scope after the call was done
+         * Otherwise all the other calls will crash.
          */
         xmlStringAlreadyDefined = '';
-      }  
+      }
 
 
     };
@@ -158,8 +158,8 @@
         + '<' + callName + 'Request xmlns="urn:ebay:apis:eBLBaseComponents">'
         + xmlStr
         + ' </' + callName + 'Request>';
-        
-        //console.log(xmlData);  
+
+        //console.log(xmlData);
         return xmlData;
     }
 
@@ -174,12 +174,12 @@
         + userToken + '</eBayAuthToken> </RequesterCredentials>'
         + xmlStr
         + ' </' + callName + 'Request>';
-        
-        // console.log(xmlData);  
+
+        // console.log(xmlData);
         return xmlData;
     }
 
-    
+
     function inspect(value)
     {
         console.log(util.inspect(value, false, null));
